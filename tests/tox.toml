@@ -1,0 +1,22 @@
+requires = ["tox>=4"]
+env_list = ["unittest", "integrationtest", "coverage"]
+
+[testenv]
+description = "Base environment for running tests"
+deps = ["pytest>=8", "matplotlib", "numpy", "coverage"]
+
+[env.unittest]
+description = "Run Unit Tests"
+commands = [["pytest", "tests/unit/test_diffusion2d_functions.py"]]
+
+[env.integrationtest]
+description = "Run Integration Tests"
+commands = [["pytest", "tests/integration/test_diffusion2d.py"]]
+
+[env.coverage]
+description = "Check Coverage"
+commands = [
+    ["coverage", "run", "-m", "pytest", "tests/"],
+    ["coverage", "html", "-d", "coverage-html"],
+    ["coverage", "report", "-m"]
+]
